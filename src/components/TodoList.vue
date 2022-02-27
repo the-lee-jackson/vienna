@@ -2,7 +2,7 @@
 import TodoItemComponent from '@/components/TodoItemComponent.vue';
 
 const props = defineProps({
-    items: Array<any>()
+    items: null
 })
 
 const emit = defineEmits(['itemDelete', 'itemEdit', 'itemChangeStatus'])

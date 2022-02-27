@@ -11,6 +11,9 @@ import { RouterLink, RouterView } from "vue-router";
             <RouterLink class="nav-link" to="/">Todo list</RouterLink>
           </li>
           <li class="nav-item">
+            <RouterLink class="nav-link" to="/export">Export data</RouterLink>
+          </li>
+          <li class="nav-item">
             <RouterLink class="nav-link" to="/about">About</RouterLink>
           </li>
         </ul>

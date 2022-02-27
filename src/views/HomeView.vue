@@ -1,10 +1,43 @@
 <template>
   <main>
     <div class="container">
-      <input @keydown.enter="addItem" v-model="todoText" type="text" class="form-control main-task-input" placeholder="Type something and press ENTER" aria-label="Todo Item">
+      <input
+        @keydown.enter="addItem"
+        v-model="todoText"
+        type="text"
+        class="form-control main-task-input"
+        placeholder="Type something and press ENTER"
+        aria-label="Todo Item"
+      />
     </div>
-    <div class="container">
-      <TodoList @itemDelete="deleteItem" :items="todoStore.todos" />
+    <div v-if="todoStore.itemsTodo.length > 0" class="container">
+      <h3>Todo Items</h3>
+      <TodoList
+        @itemDelete="deleteItem"
+        @itemEdit="editItem"
+        @itemChangeStatus="changeItemStatus"
+        :items="todoStore.itemsTodo"
+      />
+    </div>
+
+    <div v-if="todoStore.itemsInProgress.length > 0" class="container">
+      <h3>In Progress Items</h3>
+      <TodoList
+        @itemDelete="deleteItem"
+        @itemEdit="editItem"
+        @itemChangeStatus="changeItemStatus"
+        :items="todoStore.itemsInProgress"
+      />
+    </div>
+
+    <div v-if="todoStore.itemsDone.length > 0" class="container">
+      <h3>Done Items</h3>
+      <TodoList
+        @itemDelete="deleteItem"
+        @itemEdit="editItem"
+        @itemChangeStatus="changeItemStatus"
+        :items="todoStore.itemsDone"
+      />
     </div>
   </main>
 </template>
@@ -38,6 +71,14 @@ function addItem() {
 
 function deleteItem(itemId: string) {
   todoStore.deleteTodoItem(itemId)
+}
+
+function editItem(itemId: string) {
+  console.log(itemId)
+}
+
+function changeItemStatus(itemId: string, newStatus: string) {
+  todoStore.changeItemStatus(itemId, newStatus)
 }
 
 </script>

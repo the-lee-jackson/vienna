@@ -27,9 +27,11 @@ export const useTodoStore = defineStore({
   state: () => ({
     todos: [] as Array<TodoItem>
   }),
-  // getters: {
-  //   doubleCount: (state) => state.counter * 2,
-  // },
+  getters: {
+    itemsTodo: (state) => state.todos.filter(item => item.status === 'TODO'),
+    itemsInProgress: (state) => state.todos.filter(item => item.status === 'IN_PROGRESS'),
+    itemsDone: (state) => state.todos.filter(item => item.status === 'DONE'),
+  },
   actions: {
     /**
      * Add a new todo item to the store.
@@ -73,6 +75,29 @@ export const useTodoStore = defineStore({
       // call the splice() function to remove the item
       // from the list
       this.todos.splice(idx, 1)
+    },
+
+    changeItemStatus(itemId: string, newStatus: string) {
+      // do nothing if we are given white space
+      if (itemId.trim() === '') return
+
+      // if the list is empty, then there is nothing to delete
+      if (this.todos.length === 0) return
+
+      // must be a valid new status for the item
+      if (newStatus != 'TODO' && newStatus != 'IN_PROGRESS' && newStatus != 'DONE') return
+
+      // first, search for the item in the list
+      let idx = this.todos.findIndex(item => item.id === itemId)
+
+      // if the item was not found, then do nothing
+      if (idx == -1) return
+
+      // set the new status for the item
+      this.todos[idx].status = newStatus
+
+      // change modification date because we updated its status
+      this.todos[idx].modifiedAt = new Date()
     }
   },
 });

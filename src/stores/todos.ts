@@ -47,5 +47,29 @@ export const useTodoStore = defineStore({
         oldStatus: null
       })
     },
+
+    /**
+     * Search for the item in the todo list and if the item
+     * is found, then it is removed. If the item is not found
+     * it will do nothing.
+     * @param itemId the item id to remove
+     */
+    deleteTodoItem(itemId: string) {
+      // do nothing if we are given white space
+      if (itemId.trim() === '') return
+
+      // if the list is empty, then there is nothing to delete
+      if (this.todos.length === 0) return
+
+      // first, search for the item in the list
+      let idx = this.todos.findIndex(item => item.id === itemId)
+
+      // if the item was not found, then do nothing
+      if (idx == -1) return
+
+      // call the splice() function to remove the item
+      // from the list
+      this.todos.splice(idx, 1)
+    }
   },
 });

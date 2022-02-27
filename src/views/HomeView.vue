@@ -1,10 +1,10 @@
 <template>
   <main>
     <div class="container">
-      <input @keydown.enter="addItem" v-model="todoText" type="text" class="form-control" placeholder="Type something and press ENTER" aria-label="Todo Item">
+      <input @keydown.enter="addItem" v-model="todoText" type="text" class="form-control main-task-input" placeholder="Type something and press ENTER" aria-label="Todo Item">
     </div>
     <div class="container">
-      <TodoList :items="todoStore.todos" />
+      <TodoList @itemDelete="deleteItem" :items="todoStore.todos" />
     </div>
   </main>
 </template>
@@ -36,4 +36,16 @@ function addItem() {
   todoText.value = ''
 }
 
+function deleteItem(itemId: string) {
+  todoStore.deleteTodoItem(itemId)
+}
+
 </script>
+
+<style scoped>
+.main-task-input {
+  margin-bottom: 40px;
+  font-weight: bold;
+  font-size: 1.2em;
+}
+</style>

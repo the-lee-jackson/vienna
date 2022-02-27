@@ -3,11 +3,17 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
+  <header class="main-header">
     <div>
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <ul class="nav">
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/">Todo list</RouterLink>
+          </li>
+          <li class="nav-item">
+            <RouterLink class="nav-link" to="/about">About</RouterLink>
+          </li>
+        </ul>
       </nav>
     </div>
   </header>
@@ -15,3 +21,8 @@ import { RouterLink, RouterView } from "vue-router";
   <RouterView />
 </template>
 
+<style scoped>
+.main-header {
+  background: rgb(204, 204, 204);;
+}
+</style>

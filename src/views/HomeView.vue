@@ -1,7 +1,5 @@
 <template>
   <main>
-    <h1>Welcome to Vienna App</h1>
-    <hr />
     <div class="container">
       <TodoList />
     </div>

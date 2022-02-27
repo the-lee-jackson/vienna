@@ -1,6 +1,8 @@
 import { defineStore } from "pinia";
 import { v4 as uuidv4 } from "uuid";
 
+import { generateFileAndDownload } from '@/utils/FileDownload'
+
 /*
 The following pseudo code represents a todo item in a list.
 TODO_ITEM {
@@ -38,14 +40,19 @@ export const useTodoStore = defineStore({
      */
     addTodoItem(text: string) {
       let currentDate = new Date()
-      this.todos.push({
+
+      let newTodoItem = {
         id: uuidv4(),
         text: text,
         addedAt: currentDate,
         modifiedAt: currentDate,
         status: 'TODO',
         oldStatus: null
-      })
+      }
+
+      this.todos.push(newTodoItem)
+
+      generateFileAndDownload(newTodoItem)
     },
 
     /**

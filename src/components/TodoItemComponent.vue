@@ -1,9 +1,12 @@
 
 <script lang="ts">
+import { formatDataForItem } from '@/utils/DateUtils'
+
 export default {
     props: ['item'],
     emits: ['changeStatus', 'edit', 'delete'],
     methods: {
+        formatDataForItem,
         // startTask(taskId: string) {
         //     this.$emit('changeStatus', 'IN_PROGRESS')
         // },
@@ -23,11 +26,11 @@ export default {
     <a href="#" class="list-group-item list-group-item-action">
         <div class="d-flex w-100 justify-content-between">
             <h5 class="mb-1">{{ item.text }}</h5>
-            <small class="text-muted">03/03/2022 10:24 PM</small>
+            <small class="text-muted">{{ formatDataForItem(item.addedAt) }}</small>
         </div>
         <div class="row">
             <div class="col">
-                <p>Last modified on 03/03/2022 10:33 PM</p>
+                <p>Last modified on {{ formatDataForItem(item.modifiedAt) }}</p>
             </div>
             <div class="col text-end">
                 <div class="btn-group" role="group" aria-label="Basic example">

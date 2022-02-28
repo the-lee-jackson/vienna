@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { useTodoStore } from '@/stores/todos';
+import { generateFileAndDownload } from '@/utils/ExportUtils'
 
 // get a reference to the todo store to use
 let todoStore = useTodoStore()
 
+// get all todos and download them as a JSON file
 function exportData() {
-  console.log('Export Data pressed')
+  generateFileAndDownload(todoStore.todos)
 }
 
 

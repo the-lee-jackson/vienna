@@ -30,9 +30,13 @@
     </ul>
 
     <h4>Export Data</h4>
-    To export data from the app, go to the <strong>Export Data</strong> page and 
-    click the <strong>Export Data</strong> button at the bottom of the page.
-    The button will appear if at least one item is added to the list.
+    <p>
+      To export data from the app, go to the <strong>Export Data</strong> page and 
+      click the <strong>Export Data</strong> button at the bottom of the page.
+      The button will appear if at least one item is added to the list.
+    </p>
+
+    <p>The export functionality was tested with Google Chrome v98.0.4758.102</p>
 
   </div>
 </template>

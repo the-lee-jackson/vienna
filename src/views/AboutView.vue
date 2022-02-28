@@ -29,5 +29,10 @@
       <li>To remove all data simply <em>refresh</em> the current page.</li>
     </ul>
 
+    <h4>Export Data</h4>
+    To export data from the app, go to the <strong>Export Data</strong> page and 
+    click the <strong>Export Data</strong> button at the bottom of the page.
+    The button will appear if at least one item is added to the list.
+
   </div>
 </template>

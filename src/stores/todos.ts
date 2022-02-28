@@ -25,14 +25,65 @@ export interface TodoItem {
 export const useTodoStore = defineStore({
   id: "todos",
   state: () => ({
-    todos: [] as Array<TodoItem>
+    todos: [] as Array<TodoItem>,
+    currentEditItem: '',
+    currentEditItemText: ''
   }),
   getters: {
     itemsTodo: (state) => state.todos.filter(item => item.status === 'TODO'),
     itemsInProgress: (state) => state.todos.filter(item => item.status === 'IN_PROGRESS'),
     itemsDone: (state) => state.todos.filter(item => item.status === 'DONE'),
+
+    getItemById: (state) => {
+      return (itemId: string) => state.todos.find(item => item.id === itemId)
+    }
   },
   actions: {
+    updateItem(itemId: string, newText: string) {
+      // do nothing if we are given white space
+      if (itemId.trim() === '') return
+
+      // if the list is empty, then there is nothing to delete
+      if (this.todos.length === 0) return
+
+      // first, search for the item in the list
+      let idx = this.todos.findIndex(item => item.id === itemId)
+
+      // if the item was not found, then do nothing
+      if (idx == -1) return
+
+      // set the new text
+      this.todos[idx].text = newText
+
+      // modify the update timestamp
+      this.todos[idx].modifiedAt = new Date()
+    },
+
+    clearCurrentEditItem() {
+      this.currentEditItem = ''
+      this.currentEditItemText = ''
+    },
+
+    setCurrentEditItem(itemId: string) {
+      // do nothing if we are given white space
+      if (itemId.trim() === '') return
+
+      // if the list is empty, then there is nothing to delete
+      if (this.todos.length === 0) return
+
+      // first, search for the item in the list
+      let idx = this.todos.findIndex(item => item.id === itemId)
+
+      // if the item was not found, then do nothing
+      if (idx == -1) return
+
+      // set the current id
+      this.currentEditItem = itemId
+
+      // and set the value of the current edit text to be easy to access
+      this.currentEditItemText = this.todos[idx].text
+    },
+
     /**
      * Add a new todo item to the store.
      * 

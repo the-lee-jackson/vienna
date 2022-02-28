@@ -1,6 +1,8 @@
 <template>
   <main>
     <div class="container">
+      <h3 v-if="todoStore.currentEditItem">Edit item <span class="badge rounded-pill bg-secondary">{{ todoStore.currentEditItem }}</span></h3>
+      <h3 v-else>Add a new item to the list</h3>
       <input
         @keydown.enter="addItem"
         v-model="todoText"
@@ -57,6 +59,27 @@ let todoText = ref('')
  * and add the value to the list of todos
  */
 function addItem() {
+  // check to see if the edit mode is activated
+  if (todoStore.currentEditItem) {
+
+    // if the input is empty, then cancel the operation
+    if (todoText.value.trim() === '') {
+      todoStore.clearCurrentEditItem()
+      return
+    }
+
+    // update the selected item for edit operation
+    todoStore.updateItem(todoStore.currentEditItem, todoText.value.trim())
+
+    // clear the edit mode after
+    todoStore.clearCurrentEditItem()
+
+    // clear the input after
+    todoText.value = ''
+
+    return
+  }
+
   // check to see if we have anything else besides whitespace entered
   if (todoText.value.trim() === '') return
 
@@ -70,14 +93,19 @@ function addItem() {
 }
 
 function deleteItem(itemId: string) {
+  todoStore.clearCurrentEditItem()
+  todoText.value = ''
   todoStore.deleteTodoItem(itemId)
 }
 
 function editItem(itemId: string) {
-  console.log(itemId)
+  todoStore.setCurrentEditItem(itemId)
+  todoText.value = todoStore.currentEditItemText
 }
 
 function changeItemStatus(itemId: string, newStatus: string) {
+  todoStore.clearCurrentEditItem()
+  todoText.value = ''
   todoStore.changeItemStatus(itemId, newStatus)
 }
 

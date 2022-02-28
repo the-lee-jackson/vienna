@@ -3,13 +3,12 @@ import { RouterLink, RouterView } from "vue-router";
 </script>
 
 <template>
-  <header>
+  <header class="main-header">
     <div>
-      <h1 class="text-center text-bold">VIENNA</h1>
       <nav>
-        <ul class="nav justify-content-center">
+        <ul class="nav">
           <li class="nav-item">
-            <RouterLink class="nav-link" to="/">Home</RouterLink>
+            <RouterLink class="nav-link" to="/">Todo list</RouterLink>
           </li>
           <li class="nav-item">
             <RouterLink class="nav-link" to="/about">About</RouterLink>
@@ -19,8 +18,11 @@ import { RouterLink, RouterView } from "vue-router";
     </div>
   </header>
 
-  <hr />
-
   <RouterView />
 </template>
 
+<style scoped>
+.main-header {
+  background: rgb(204, 204, 204);;
+}
+</style>

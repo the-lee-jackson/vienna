@@ -1,7 +1,13 @@
 # The Vienna Project
 
 This is a simple TODO list app for showing some
-functionalities of Vue 3 and Pinia state management.
+functionalities of Vue 3 and Pinia state management library.
+
+## Live Demo
+To see a live demo of the project,
+click [here](https://the-lee-jackson.github.io/),
+or type the following address in the browser:
+`https://the-lee-jackson.github.io/`
 
 # How to run the project locally
 * Install all requirements (node and npm);
